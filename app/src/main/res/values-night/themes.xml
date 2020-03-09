@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme.DayNight.BlackWhite">
+        <item name="colorPrimaryDark">#000</item>
+        <item name="appBarLayoutStyle">@style/Widget.App.AppBarLayout.Surface</item>
+        <item name="toolbarStyle">@style/Widget.App.Toolbar.Surface.Primary</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar">false</item>
+        <item name="android:navigationBarColor">#000</item>
+        <item name="android:statusBarColor">#000</item>
+    </style>
+
+    <style name="AppTheme.DayNight.BlackWhite.Teal">
+        <item name="colorPrimary">#03DAC6</item>
+        <item name="colorPrimaryDark">#018786</item>
+        <item name="colorSecondary">#03DAC6</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="colorOnSecondary">#FFFFFF</item>
+        <item name="colorControlNormal">#03DAC6</item>
+        <item name="colorControlHighlight">#4fb7b6</item>
+    </style>
+
+</resources>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="ShapeAppearance.App.SmallComponents" parent="ShapeAppearance.MaterialComponents.SmallComponent" />
+
+    <style name="ShapeAppearance.App.MediumComponents" parent="ShapeAppearance.MaterialComponents.MediumComponent" />
+
+    <style name="ShapeAppearance.App.LargeComponents" parent="ShapeAppearance.MaterialComponents.LargeComponent" />
+
+    <style name="ShapeAppearance.App.SmallComponents.Rounded">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">8dp</item>
+    </style>
+
+    <style name="ShapeAppearance.App.MediumComponents.Rounded">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+    </style>
+
+    <style name="ShapeAppearance.App.LargeComponents.Rounded">
+        <item name="cornerFamilyTopLeft">rounded</item>
+        <item name="cornerFamilyTopRight">rounded</item>
+        <item name="cornerSizeTopLeft">24dp</item>
+        <item name="cornerSizeTopRight">24dp</item>
+    </style>
+
+    <style name="TearDrop">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeBottomLeft">4dp</item>
+    </style>
+
+    <style name="TearDrop.12">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">12dp</item>
+        <item name="cornerSizeTopRight">12dp</item>
+        <item name="cornerSizeBottomRight">12dp</item>
+        <item name="cornerSizeBottomLeft">4dp</item>
+    </style>
+
+    <style name="TearDrop.20">
+        <item name="cornerSizeTopLeft">20dp</item>
+        <item name="cornerSizeTopRight">20dp</item>
+        <item name="cornerSizeBottomRight">20dp</item>
+    </style>
+
+    <style name="TearDrop.28">
+        <item name="cornerSizeTopLeft">28dp</item>
+        <item name="cornerSizeTopRight">28dp</item>
+        <item name="cornerSizeBottomRight">28dp</item>
+    </style>
+
+    <style name="TearDrop.48">
+        <item name="cornerSizeTopLeft">48dp</item>
+        <item name="cornerSizeTopRight">48dp</item>
+        <item name="cornerSizeBottomRight">48dp</item>
+    </style>
+</resources>

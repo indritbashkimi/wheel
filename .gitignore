@@ -1,0 +1,25 @@
+# Local configuration file (sdk path, etc)
+local.properties
+
+# Gradle generated files
+.gradle/
+.idea/gradle.xml
+build
+app/release
+
+# User-specific configurations
+.idea/
+*.iml
+
+# Api keys
+app/google-services.json
+
+# OS-specific files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+.directory

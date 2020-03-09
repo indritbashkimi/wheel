@@ -1,0 +1,77 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'androidx.navigation.safeargs'
+apply plugin: 'com.google.gms.google-services'
+
+android {
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE-FIREBASE.txt'
+        exclude 'META-INF/NOTICE'
+    }
+
+    compileSdkVersion versions.android.compileSdk
+    buildToolsVersion versions.android.buildTools
+    defaultConfig {
+        applicationId "com.ibashkimi.wheel"
+        minSdkVersion versions.android.minSdk
+        targetSdkVersion versions.android.targetSdk
+        versionCode 1
+        versionName "0.1"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    viewBinding.enabled = true
+    //android.buildFeatures.viewBinding = true
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+
+dependencies {
+    testImplementation deps.test.junit
+    androidTestImplementation deps.test.espresso.core
+
+    implementation project(":core")
+    implementation project(":firestore")
+    implementation project(":location")
+
+    implementation deps.google.material
+
+    implementation deps.androidx.browser
+    implementation deps.androidx.cardview
+    implementation deps.androidx.media
+    implementation deps.androidx.percentlayout
+    implementation deps.androidx.preference
+    implementation deps.androidx.recyclerview
+    implementation deps.androidx.vectordrawable
+
+    implementation "androidx.navigation:navigation-fragment-ktx:${versions.androidx.navigation}"
+    implementation "androidx.navigation:navigation-ui-ktx:${versions.androidx.navigation}"
+
+    implementation 'com.github.stfalcon:chatkit:0.3.3'
+
+    implementation 'com.google.guava:guava:28.2-android'
+}
+
+allprojects {
+    repositories {
+        maven { url 'https://maven.fabric.io/public' }
+    }
+}
+
+repositories {
+    mavenCentral()
+}

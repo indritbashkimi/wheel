@@ -1,0 +1,3 @@
+<resources>
+    <dimen name="list_item_spacing_half">8dp</dimen>
+</resources>

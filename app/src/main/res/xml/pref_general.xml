@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <androidx.preference.PreferenceCategory android:title="@string/pref_header_appearance">
+
+        <androidx.preference.ListPreference
+            android:defaultValue="system_default"
+            android:dialogTitle="@string/pref_title_theme"
+            android:entries="@array/pref_night_mode_human_value"
+            android:entryValues="@array/pref_night_mode_phone_value"
+            android:key="night_mode"
+            android:summary="%s"
+            android:title="@string/pref_title_theme" />
+
+        <androidx.preference.ListPreference
+            android:defaultValue="normal"
+            android:dialogTitle="@string/dialog_title_map_type"
+            android:entries="@array/pref_map_style_human"
+            android:entryValues="@array/pref_map_style_value"
+            android:key="map_style"
+            android:summary="%s"
+            android:title="@string/pref_title_map_style" />
+
+    </androidx.preference.PreferenceCategory>
+
+</androidx.preference.PreferenceScreen>

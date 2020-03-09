@@ -1,0 +1,43 @@
+<resources>
+
+    <style name="Widget.App.AppBarLayout.Primary" parent="Widget.MaterialComponents.AppBarLayout.Primary">
+        <item name="android:elevation">4dp</item>
+    </style>
+
+    <style name="Widget.App.AppBarLayout.Primary.LightText">
+        <item name="android:theme">@style/ThemeOverlay.MaterialComponents.Dark</item>
+    </style>
+
+    <style name="Widget.App.AppBarLayout.Primary.DarkText" parent="Widget.MaterialComponents.AppBarLayout.Primary">
+        <item name="android:theme">@style/ThemeOverlay.MaterialComponents.Light</item>
+    </style>
+
+    <style name="Widget.App.AppBarLayout.Surface" parent="Widget.MaterialComponents.AppBarLayout.PrimarySurface" />
+
+    <style name="Widget.App.Toolbar.Primary" parent="Widget.MaterialComponents.Toolbar.Primary">
+        <item name="android:elevation">0dp</item>
+        <item name="popupTheme">@style/Theme.MaterialComponents.DayNight</item>
+    </style>
+
+    <style name="Widget.App.Toolbar.Primary.Elevated" parent="Widget.MaterialComponents.Toolbar.Primary" />
+
+    <style name="Widget.App.Toolbar.Surface" parent="Widget.MaterialComponents.Toolbar.Surface" />
+
+    <style name="Widget.App.Toolbar.Surface.Primary" parent="Widget.MaterialComponents.Toolbar.Surface">
+        <item name="titleTextColor">?colorPrimary</item>
+    </style>
+
+    <style name="Widget.App.PopupMenu" parent="ThemeOverlay.MaterialComponents" />
+
+    <style name="Widget.App.PopupMenu.Surface" parent="Widget.MaterialComponents.PopupMenu" />
+
+    <style name="Widget.App.PopupMenu.Overflow" parent="Widget.MaterialComponents.PopupMenu.Overflow" />
+
+    <style name="Widget.App.CardView" parent="Widget.MaterialComponents.CardView" />
+
+    <style name="Widget.App.CardView.Colored">
+        <item name="cardBackgroundColor">?colorError</item>
+        <item name="android:textColor">?colorOnError</item>
+    </style>
+
+</resources>

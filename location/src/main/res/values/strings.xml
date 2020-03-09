@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="place_picker_select_location">Select location</string>
+    <string name="location_permission_needed">Location Permission Needed</string>
+    <string name="location_permission_rationale">This app needs the Location permission, please accept to use location functionality</string>
+    <string name="place_picker_search">Search</string>
+</resources>

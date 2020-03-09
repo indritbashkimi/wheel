@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="pref_night_mode_human_value">
+        <item>@string/system_default</item>
+        <item>@string/theme_light</item>
+        <item>@string/theme_dark</item>
+    </string-array>
+
+    <string-array name="pref_night_mode_phone_value">
+        <item>system_default</item>
+        <item>light</item>
+        <item>dark</item>
+    </string-array>
+
+    <string-array name="pref_map_style_human">
+        <item>@string/pref_map_style_normal</item>
+        <item>@string/pref_map_style_satellite</item>
+        <item>@string/pref_map_style_hybrid</item>
+        <item>@string/pref_map_style_terrain</item>
+        <item>@string/pref_map_style_aubergine</item>
+        <item>@string/pref_map_style_dark</item>
+        <item>@string/pref_map_style_night</item>
+        <item>@string/pref_map_style_retro</item>
+        <item>@string/pref_map_style_silver</item>
+    </string-array>
+
+    <string-array name="pref_map_style_value">
+        <item>normal</item>
+        <item>satellite</item>
+        <item>hybrid</item>
+        <item>terrain</item>
+        <item>aubergine</item>
+        <item>dark</item>
+        <item>night</item>
+        <item>retro</item>
+        <item>silver</item>
+    </string-array>
+
+    <string name="pref_map_style_aubergine">Aubergine</string>
+    <string name="pref_map_style_dark">Dark</string>
+    <string name="pref_map_style_night">Night</string>
+    <string name="pref_map_style_retro">Retro</string>
+    <string name="pref_map_style_silver">Silver</string>
+    <string name="delete_comment">Delete</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
+
+    <string-array name="comment_options_array">
+        <item>@string/like_comment</item>
+        <item>@string/delete_comment</item>
+        <item>@string/copy_comment_text</item>
+        <item>@string/report_comment</item>
+    </string-array>
+
+</resources>

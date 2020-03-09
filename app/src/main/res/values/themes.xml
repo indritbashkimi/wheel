@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="BaseTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorOnPrimary">#FFF</item>
+        <item name="colorOnSecondary">#FFF</item>
+
+        <item name="appBarLayoutStyle">@style/Widget.App.AppBarLayout.Primary.LightText</item>
+        <item name="toolbarStyle">@style/Widget.App.Toolbar.Primary</item>
+        <item name="cardViewStyle">@style/Widget.App.CardView</item>
+        <item name="materialCardViewStyle">@style/Widget.App.CardView</item>
+        <item name="popupMenuStyle">@style/Widget.App.PopupMenu</item>
+        <item name="actionOverflowMenuStyle">@style/Widget.App.PopupMenu.Overflow</item>
+
+        <item name="windowActionModeOverlay">true</item>
+        <item name="actionModeBackground">?attr/colorPrimary</item>
+        <item name="android:windowAllowEnterTransitionOverlap">true</item>
+        <item name="android:windowAllowReturnTransitionOverlap">true</item>
+
+        <item name="shapeAppearanceSmallComponent">
+            @style/ShapeAppearance.App.SmallComponents.Rounded
+        </item>
+        <item name="shapeAppearanceMediumComponent">
+            @style/ShapeAppearance.App.MediumComponents.Rounded
+        </item>
+        <item name="shapeAppearanceLargeComponent">
+            @style/ShapeAppearance.App.LargeComponents.Rounded
+        </item>
+    </style>
+
+    <style name="AppTheme.DayNight" parent="BaseTheme" />
+
+    <style name="AppTheme.DayNight.LightPrimaryColor">
+        <item name="colorOnPrimary">#000</item>
+        <item name="appBarLayoutStyle">@style/Widget.App.AppBarLayout.Primary.DarkText</item>
+    </style>
+
+    <style name="AppTheme.DayNight.BlackWhite">
+        <item name="colorPrimaryDark">#757575</item>
+        <item name="appBarLayoutStyle">@style/Widget.App.AppBarLayout.Surface</item>
+        <item name="toolbarStyle">@style/Widget.App.Toolbar.Surface.Primary</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar">true</item>
+        <item name="android:navigationBarColor">#FFF</item>
+        <item name="android:statusBarColor">#FFF</item>
+    </style>
+
+    <style name="AppTheme.DayNight.BlackWhite.Teal">
+        <item name="colorPrimary">#018786</item>
+        <item name="colorPrimaryDark">#018786</item>
+        <item name="colorSecondary">#018786</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="colorOnSecondary">#FFFFFF</item>
+        <item name="colorControlNormal">#018786</item>
+        <item name="colorControlHighlight">#4fb7b6</item>
+    </style>
+
+</resources>

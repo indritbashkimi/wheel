@@ -1,0 +1,143 @@
+/**
+ * Shared file between builds so that they can all use the same dependencies and
+ * maven repositories.
+ **/
+
+def versions = [
+        android: [
+                compileSdk: 29,
+                buildTools: '29.0.3',
+                minSdk    : 21,
+                targetSdk : 29
+        ],
+        androidx: [
+                annotation          : '1.1.0',
+                appcompat           : '1.1.0',
+                browser             : '1.2.0',
+                cardview            : '1.0.0',
+                constraintlayout    : '2.0.0-beta4',
+                core                : '1.2.0',
+                fragment            : '1.2.2',
+                gridlayout          : '1.0.0',
+                lifecycle           : '2.2.0',
+                media               : '1.1.0',
+                navigation          : '2.2.1',
+                paging              : '2.1.1',
+                palette             : '1.0.0',
+                preference          : '1.1.0',
+                percentlayout       : '1.0.0',
+                room                : '2.2.4',
+                recyclerview        : '1.1.0',
+                swiperefreshlayout  : '1.0.0',
+                vectordrawable      : '1.1.0',
+        ],
+        firebase : [
+                auth        : '19.2.0',
+                database    : '19.2.1',
+                firestore   : '21.4.1',
+                storage     : '19.1.1',
+                core        : '17.2.3',
+                uiauth      : '6.2.0'
+        ],
+        google: [
+                material    : '1.2.0-alpha05',
+                places      : '2.2.0'
+        ],
+        kotlin : '1.3.70',
+        playservices : [
+                auth        : '17.0.0',
+                location    : '17.0.0',
+                maps        : '17.0.0',
+                mapsutils   : '0.6.2'
+        ],
+        test : [
+                runner      : '1.1.1',
+                espresso    : '3.2.0'
+        ]
+]
+
+def deps = [
+        androidx : [
+                annotation          : "androidx.annotation:annotation:${versions.androidx.annotation}",
+                appcompat           : "androidx.appcompat:appcompat:${versions.androidx.appcompat}",
+                browser             : "androidx.browser:browser:${versions.androidx.browser}",
+                cardview            : "androidx.cardview:cardview:${versions.androidx.cardview}",
+                constraintlayout    : "androidx.constraintlayout:constraintlayout:${versions.androidx.constraintlayout}",
+                core                : "androidx.core:core:${versions.androidx.core}",
+                corektx             : "androidx.core:core-ktx:${versions.androidx.core}",
+                fragment            : "androidx.fragment:fragment-ktx:${versions.androidx.fragment}",
+                gridlayout          : "androidx.gridlayout:gridlayout:${versions.androidx.gridlayout}",
+                media               : "androidx.media:media:${versions.androidx.media}",
+                paging              : [
+                        runtime     : "androidx.paging:paging-runtime-ktx:${versions.androidx.paging}"
+                ],
+                palette             : "androidx.palette:palette:${versions.androidx.palette}",
+                percentlayout       : "androidx.percentlayout:percentlayout:${versions.androidx.percentlayout}",
+                preference          : "androidx.preference:preference-ktx:${versions.androidx.preference}",
+                recyclerview        : "androidx.recyclerview:recyclerview:${versions.androidx.recyclerview}",
+                recyclerviewselection  : "androidx.recyclerview:recyclerview-selection:${versions.androidx.recyclerview}",
+                swiperefreshlayout  : "androidx.swiperefreshlayout:swiperefreshlayout:${versions.androidx.swiperefreshlayout}",
+                vectordrawable      : "androidx.vectordrawable:vectordrawable:${versions.androidx.vectordrawable}",
+                vectordrawableanimated : "androidx.vectordrawable:vectordrawable-animated:${versions.androidx.vectordrawable}"
+        ],
+        firebase : [
+                database    : "com.google.firebase:firebase-database-ktx:${versions.firebase.database}",
+                auth        : "com.google.firebase:firebase-auth:${versions.firebase.auth}",
+                firestore   : "com.google.firebase:firebase-firestore-ktx:${versions.firebase.firestore}",
+                storage     : "com.google.firebase:firebase-storage-ktx:${versions.firebase.storage}",
+                core        : "com.google.firebase:firebase-core:${versions.firebase.core}",
+                uiauth      : "com.firebaseui:firebase-ui-auth:${versions.firebase.uiauth}"
+        ],
+        google : [
+                material    : "com.google.android.material:material:${versions.google.material}",
+                places      : "com.google.android.libraries.places:places-compat:${versions.google.places}"
+        ],
+        kotlin : [
+                stdlib          : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$versions.kotlin",
+                test            : "org.jetbrains.kotlin:kotlin-test-junit:$versions.kotlin",
+                plugin          : "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin",
+                allopen         : "org.jetbrains.kotlin:kotlin-allopen:$versions.kotlin",
+                coroutines      : 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.3'
+        ],
+        lifecycle : [
+                common      : "androidx.lifecycle:lifecycle-common-java8:${versions.androidx.lifecycle}",
+                compiler    : "androidx.lifecycle:lifecycle-compiler:${versions.androidx.lifecycle}",
+                extensions  : "androidx.lifecycle:lifecycle-extensions:${versions.androidx.lifecycle}",
+                livedata    : "androidx.lifecycle:lifecycle-livedata-ktx:${versions.androidx.lifecycle}",
+                runtime     : "androidx.lifecycle:lifecycle-runtime-ktx:${versions.androidx.lifecycle}",
+                viewmodel   : "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.androidx.lifecycle}"
+        ],
+        navigation : [
+                fragment     : "androidx.navigation:navigation-fragment-ktx:${versions.androidx.navigation}",
+                safeArgs: [
+                        plugin: "androidx.navigation:navigation-safe-args-gradle-plugin:${versions.androidx.navigation}"
+                ],
+                ui         : "androidx.navigation:navigation-ui-ktx:${versions.androidx.navigation}"
+        ],
+        playservices : [
+                auth        : "com.google.android.gms:play-services-maps:${versions.playservices.maps}",
+                location    : "com.google.android.gms:play-services-location:${versions.playservices.location}",
+                maps        : "com.google.android.gms:play-services-maps:${versions.playservices.maps}",
+                mapsutils   : "com.google.maps.android:android-maps-utils:${versions.playservices.mapsutils}"
+        ],
+        room : [
+                common      : "androidx.room:room-common:${versions.androidx.room}",
+                compiler    : "androidx.room:room-compiler:${versions.androidx.room}",
+                coroutines  : "androidx.room:room-coroutines:2.1.0-alpha04",
+                ktx         : "androidx.room:room-ktx:${versions.androidx.room}",
+                migration   : "androidx.room:room-migration:${versions.androidx.room}",
+                runtime     : "androidx.room:room-runtime:${versions.androidx.room}",
+                testing     : "androidx.room:room-testing:${versions.androidx.room}"
+        ],
+        test : [
+                junit : 'junit:junit:4.12',
+                runner      : "androidx.test:runner:${versions.test.runner}",
+                espresso : [
+                        core : "androidx.test.espresso:espresso-core:${versions.test.espresso}"
+                ]
+        ]
+
+]
+
+ext.versions = versions
+ext.deps = deps
