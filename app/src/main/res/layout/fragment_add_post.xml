@@ -81,7 +81,7 @@
         android:id="@+id/save_post"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_send"
+        android:src="@drawable/ic_send_message"
         android:text="@string/action_save_post"
         app:fabSize="normal"
         app:layout_anchor="@id/bottom_app_bar" />

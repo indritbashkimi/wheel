@@ -4,7 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -16,6 +19,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.textfield.TextInputLayout
 import com.ibashkimi.wheel.R
 import com.ibashkimi.wheel.core.model.messaging.Message
 import com.ibashkimi.wheel.databinding.ItemMessageBinding
@@ -71,10 +75,15 @@ class ChatFragment : Fragment() {
         adapter = MessagesAdapter()
         recyclerView.adapter = adapter
 
-        val inputView: MessageInput = root.findViewById(R.id.input)
-        inputView.setInputListener {
-            viewModel.sendMessage(args.chatId, it.toString())
-            true
+        val inputLayout: TextInputLayout = root.findViewById(R.id.input_layout)
+        val inputView: EditText = root.findViewById(R.id.input)
+        inputLayout.setEndIconOnClickListener {
+            viewModel.sendMessage(args.chatId, inputView.text.toString())
+            inputView.setText("")
+        }
+        inputLayout.isEndIconVisible = false
+        inputView.addTextChangedListener {
+            inputLayout.isEndIconVisible = it?.isNotBlank() ?: false
         }
 
         viewModel.user.observe(viewLifecycleOwner, Observer {

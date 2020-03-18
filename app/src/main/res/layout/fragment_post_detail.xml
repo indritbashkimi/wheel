@@ -23,58 +23,27 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/add_comment"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/input_layout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        app:cardElevation="4dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:strokeWidth="0dp">
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        android:hint="@string/write_comment"
+        app:endIconContentDescription="@string/send_message"
+        app:endIconDrawable="@drawable/ic_send_message"
+        app:endIconMode="custom"
+        app:endIconTint="?colorSecondary">
 
-        <LinearLayout
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/input"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingTop="16dp"
-            android:paddingBottom="16dp">
+            android:layout_height="wrap_content" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/inputLayout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_weight="1"
-                android:hint="@string/write_comment">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/comment_input"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:inputType="text" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/save_comment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical|end"
-                android:layout_margin="8dp"
-                app:fabSize="mini"
-                app:srcCompat="@drawable/ic_keyboard_return" />
-
-        </LinearLayout>
-
-    </com.google.android.material.card.MaterialCardView>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScrollView"

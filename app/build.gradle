@@ -61,8 +61,6 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:${versions.androidx.navigation}"
     implementation "androidx.navigation:navigation-ui-ktx:${versions.androidx.navigation}"
 
-    implementation 'com.github.stfalcon:chatkit:0.3.3'
-
     implementation 'com.google.guava:guava:28.2-android'
 }
 
