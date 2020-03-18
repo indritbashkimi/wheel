@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -22,8 +23,6 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputLayout
 import com.ibashkimi.wheel.R
 import com.ibashkimi.wheel.core.model.messaging.Message
-import com.ibashkimi.wheel.databinding.ItemMessageBinding
-import com.stfalcon.chatkit.messages.MessageInput
 import java.text.SimpleDateFormat
 
 
@@ -72,7 +71,7 @@ class ChatFragment : Fragment() {
         recyclerView.addItemDecoration(
             DividerItemDecoration(context, DividerItemDecoration.HORIZONTAL)
         )
-        adapter = MessagesAdapter()
+        adapter = MessagesAdapter(viewModel.userId)
         recyclerView.adapter = adapter
 
         val inputLayout: TextInputLayout = root.findViewById(R.id.input_layout)
@@ -86,10 +85,9 @@ class ChatFragment : Fragment() {
             inputLayout.isEndIconVisible = it?.isNotBlank() ?: false
         }
 
-        viewModel.user.observe(viewLifecycleOwner, Observer {
+        viewModel.otherUser.observe(viewLifecycleOwner, Observer {
             toolbar.title = it.displayName
         })
-
         viewModel.messagesPaged.observe(viewLifecycleOwner, Observer {
             adapter.submitList(it)
         })
@@ -97,23 +95,29 @@ class ChatFragment : Fragment() {
         return root
     }
 
-    inner class MessagesAdapter :
+    inner class MessagesAdapter(val userId: String) :
         PagedListAdapter<Message, MessagesViewHolder>(messageDiffCallback) {
 
-        /*override fun getItemViewType(position: Int): Int {
-            val item: Message = getItem(position) ?:return 0
-            return if (item.user) ==
-        }*/
+        override fun getItemViewType(position: Int): Int {
+            return if (getItem(position)?.userId == userId) 0 else 1
+        }
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessagesViewHolder =
-            MessagesViewHolder(
-                ItemMessageBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessagesViewHolder {
+            val layoutRes = when (viewType) {
+                0 -> R.layout.item_message_user
+                1 -> R.layout.item_message_other
+                else -> throw IllegalArgumentException("Unknown view type $viewType.")
+            }
+            return MessagesViewHolder(
+                LayoutInflater.from(parent.context).inflate(layoutRes, parent, false)
             )
+        }
+
 
         override fun onBindViewHolder(holder: MessagesViewHolder, position: Int) {
             getItem(position)?.let {
-                val isSameUserAsAbove = if (position - 1 > -1) {
-                    getItem(position - 1)?.user?.uid == it.user?.uid
+                val isSameUserAsAbove = if (position + 1 < itemCount) {
+                    getItem(position + 1)?.user?.uid == it.user?.uid
                 } else false
 
                 holder.bind(it, isSameUserAsAbove)
@@ -121,21 +125,20 @@ class ChatFragment : Fragment() {
         }
     }
 
-    inner class MessagesViewHolder(val binding: ItemMessageBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    inner class MessagesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+        private val user = itemView.findViewById<TextView>(R.id.user)
+        private val content = itemView.findViewById<TextView>(R.id.content)
+        private val time = itemView.findViewById<TextView>(R.id.time)
 
         fun bind(item: Message, isSameUserAsAbove: Boolean) {
-            /*if (isSameUserAsAbove) {
-                binding.user.isVisible = false
-            } else {
-                binding.user.text = item.user.displayName
-            }*/
-            binding.user.text =
-                item.user?.displayName ?: binding.user.context.getString(R.string.no_name)
-            binding.content.text = item.content
-            binding.time.text = formattedTime(item.created.time)
-            binding.root.setOnLongClickListener {
-                MaterialAlertDialogBuilder(binding.root.context)
+            user.isVisible = !isSameUserAsAbove
+            user.text =
+                item.user?.displayName ?: user.context.getString(R.string.no_name)
+            content.text = item.content
+            time.text = formattedTime(item.created.time)
+            itemView.setOnLongClickListener {
+                MaterialAlertDialogBuilder(itemView.context)
                     .setTitle(R.string.delete_message)
                     .setPositiveButton(android.R.string.ok) { _, _ ->
                         viewModel.deleteMessage(item)

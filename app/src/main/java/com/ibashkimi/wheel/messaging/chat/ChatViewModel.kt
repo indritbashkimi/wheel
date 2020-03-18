@@ -18,7 +18,9 @@ class ChatViewModel(chatId: String) : ViewModel() {
 
     private val userManager = FirestoreUserManager()
 
-    val user: LiveData<User> = repository.getChat(chatId).filterNotNull()
+    val userId = userManager.currentUserId!!
+
+    val otherUser: LiveData<User> = repository.getChat(chatId).filterNotNull()
         .flatMapLatest { room ->
             room.participants.firstOrNull { it != userManager.currentUserId }?.let {
                 userManager.getUser(it)

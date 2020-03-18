@@ -7,17 +7,19 @@
     android:clickable="true"
     android:focusable="true"
     android:orientation="vertical"
-    android:paddingStart="8dp"
-    android:paddingTop="8dp"
-    android:paddingEnd="8dp"
-    android:paddingBottom="8dp">
+    android:paddingStart="16dp"
+    android:paddingTop="4dp"
+    android:paddingEnd="16dp"
+    android:paddingBottom="4dp">
 
     <TextView
         android:id="@+id/user"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="end"
-        android:textAppearance="?textAppearanceCaption"
+        android:gravity="start"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:textAppearance="?textAppearanceBody2"
         android:textStyle="bold"
         tools:text="User Name" />
 
@@ -27,22 +29,22 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/content"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_weight="1"
-            android:gravity="end"
-            android:textAppearance="?textAppearanceSubtitle2"
-            tools:text="How are you?" />
-
-        <TextView
             android:id="@+id/time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="end"
+            android:gravity="start"
+            android:layout_marginEnd="8dp"
             android:textAppearance="?textAppearanceCaption"
             tools:text="1 min ago" />
+
+        <TextView
+            android:id="@+id/content"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="start"
+            android:textAppearance="?textAppearanceSubtitle1"
+            tools:text="How are you?" />
 
     </LinearLayout>
 
