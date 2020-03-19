@@ -2,12 +2,11 @@ package com.ibashkimi.wheel.firebase.model
 
 
 import com.google.firebase.database.Exclude
-import com.ibashkimi.wheel.core.model.posts.Content
 
 data class FirebasePost(
     @Exclude override var uid: String,
     var userId: String,
-    var position: com.ibashkimi.wheel.firebase.model.FirebasePosition?,
+    var position: FirebasePosition?,
     var created: Long,
     var content: Content?
 ) : BaseFirebaseModel(uid) {

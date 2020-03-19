@@ -29,15 +29,16 @@
             android:layout_marginTop="0dp"
             android:layout_marginBottom="16dp"
             android:hint="@string/hint_enter_a_message"
-            app:endIconTint="?colorSecondary"
             app:endIconContentDescription="@string/send_message"
             app:endIconDrawable="@drawable/ic_send_message"
-            app:endIconMode="custom">
+            app:endIconMode="custom"
+            app:endIconTint="?colorSecondary">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <com.ibashkimi.wheel.widget.TextMediaInputEditText
                 android:id="@+id/input"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:inputType="textCapSentences" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

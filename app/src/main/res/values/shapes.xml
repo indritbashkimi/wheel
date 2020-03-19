@@ -29,8 +29,8 @@
     <style name="ShapeAppearanceOverlay.App.LeftRounded" parent="ShapeAppearance.App.SmallComponents.Rounded">
         <item name="cornerFamilyTopLeft">rounded</item>
         <item name="cornerFamilyBottomLeft">rounded</item>
-        <item name="cornerSizeTopLeft">20dp</item>
-        <item name="cornerSizeBottomLeft">20dp</item>
+        <item name="cornerSizeTopLeft">16dp</item>
+        <item name="cornerSizeBottomLeft">16dp</item>
     </style>
 
     <style name="ShapeAppearanceOverlay.App.RightRounded" parent="ShapeAppearance.App.SmallComponents.Rounded">

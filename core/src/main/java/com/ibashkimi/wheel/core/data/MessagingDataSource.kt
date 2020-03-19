@@ -2,6 +2,7 @@ package com.ibashkimi.wheel.core.data
 
 import androidx.paging.DataSource
 import com.ibashkimi.wheel.core.Direction
+import com.ibashkimi.wheel.core.model.core.Content
 import com.ibashkimi.wheel.core.model.messaging.Message
 import com.ibashkimi.wheel.core.model.messaging.Room
 import kotlinx.coroutines.flow.Flow
@@ -29,7 +30,7 @@ interface MessagingDataSource {
 
     // Messages
 
-    fun createMessage(chatId: String, message: String): Flow<String>
+    fun createMessage(chatId: String, content: Content): Flow<String>
 
     fun deleteMessage(chatId: String, messageId: String): Flow<Unit>
 

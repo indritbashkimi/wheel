@@ -3,21 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
+    android:layout_height="wrap_content"
     android:background="?attr/selectableItemBackground"
     android:clickable="true"
     android:focusable="true"
-    android:layout_height="wrap_content">
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/user"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="end"
-        android:paddingTop="16dp"
-        android:paddingBottom="8dp"
         android:paddingStart="16dp"
+        android:paddingTop="16dp"
         android:paddingEnd="16dp"
+        android:paddingBottom="8dp"
         android:textAppearance="?textAppearanceSubtitle2"
         tools:text="User Name" />
 
@@ -25,40 +25,56 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
-        android:layout_marginTop="2dp"
         android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="2dp"
         android:layout_marginBottom="2dp"
         app:cardElevation="0dp"
+        app:contentPadding="-8dp"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.LeftRounded"
         app:strokeColor="?colorPrimary"
-        app:strokeWidth="1dp"
-        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.LeftRounded">
+        app:strokeWidth="1dp">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingStart="8dp"
-            android:paddingTop="4dp"
-            android:paddingEnd="8dp"
-            android:paddingBottom="4dp">
+            android:gravity="end"
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/content"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_weight="1"
-                android:gravity="end"
-                android:textAppearance="?textAppearanceSubtitle1"
-                tools:text="How are you?" />
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imageView"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:visibility="gone"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.LeftRounded" />
 
-            <TextView
-                android:id="@+id/time"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="end"
-                android:textAppearance="?textAppearanceCaption"
-                tools:text="1 min ago" />
+                android:orientation="horizontal"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="8dp">
+
+                <TextView
+                    android:id="@+id/content"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:textAppearance="?textAppearanceSubtitle1"
+                    tools:text="How are you?" />
+
+                <TextView
+                    android:id="@+id/time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:textAppearance="?textAppearanceCaption"
+                    tools:text="1 min ago" />
+
+            </LinearLayout>
 
         </LinearLayout>
 

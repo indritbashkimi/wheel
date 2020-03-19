@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.isVisible
@@ -19,10 +19,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputLayout
 import com.ibashkimi.wheel.R
+import com.ibashkimi.wheel.core.model.core.Content
 import com.ibashkimi.wheel.core.model.messaging.Message
+import com.ibashkimi.wheel.widget.TextMediaInputEditText
 import java.text.SimpleDateFormat
 
 
@@ -75,15 +78,36 @@ class ChatFragment : Fragment() {
         recyclerView.adapter = adapter
 
         val inputLayout: TextInputLayout = root.findViewById(R.id.input_layout)
-        val inputView: EditText = root.findViewById(R.id.input)
+        val inputView: TextMediaInputEditText = root.findViewById(R.id.input)
         inputLayout.setEndIconOnClickListener {
-            viewModel.sendMessage(args.chatId, inputView.text.toString())
+            viewModel.sendMessage(args.chatId, Content.Text(inputView.text.toString()))
             inputView.setText("")
         }
         inputLayout.isEndIconVisible = false
         inputView.addTextChangedListener {
             inputLayout.isEndIconVisible = it?.isNotBlank() ?: false
         }
+        inputView.inputContentInfoLiveData.observe(
+            viewLifecycleOwner,
+            Observer { inputContentInfo ->
+                val uri = inputContentInfo.contentUri.toString()
+                val content: Content? = when {
+                    uri.endsWith(".png") or uri.endsWith(".jpg") -> {
+                        Content.Media.Image(inputContentInfo.linkUri.toString(), null)
+                    }
+                    uri.endsWith(".gif") -> {
+                        Content.Media.Animation(inputContentInfo.linkUri.toString(), null)
+                    }
+                    uri.endsWith(".mp4") or uri.endsWith(".webm") -> {
+                        Content.Media.Video(inputContentInfo.linkUri.toString(), null)
+                    }
+                    else -> null
+                }
+                content?.let {
+                    viewModel.sendMessage(args.chatId, content)
+                }
+                inputContentInfo.releasePermission()
+            })
 
         viewModel.otherUser.observe(viewLifecycleOwner, Observer {
             toolbar.title = it.displayName
@@ -99,20 +123,14 @@ class ChatFragment : Fragment() {
         PagedListAdapter<Message, MessagesViewHolder>(messageDiffCallback) {
 
         override fun getItemViewType(position: Int): Int {
-            return if (getItem(position)?.userId == userId) 0 else 1
+            return if (getItem(position)?.userId == userId) R.layout.item_message_user else R.layout.item_message_other
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessagesViewHolder {
-            val layoutRes = when (viewType) {
-                0 -> R.layout.item_message_user
-                1 -> R.layout.item_message_other
-                else -> throw IllegalArgumentException("Unknown view type $viewType.")
-            }
             return MessagesViewHolder(
-                LayoutInflater.from(parent.context).inflate(layoutRes, parent, false)
+                LayoutInflater.from(parent.context).inflate(viewType, parent, false)
             )
         }
-
 
         override fun onBindViewHolder(holder: MessagesViewHolder, position: Int) {
             getItem(position)?.let {
@@ -123,19 +141,36 @@ class ChatFragment : Fragment() {
                 holder.bind(it, isSameUserAsAbove)
             }
         }
+
+        override fun onViewRecycled(holder: MessagesViewHolder) {
+            super.onViewRecycled(holder)
+            holder.recycle()
+        }
     }
 
     inner class MessagesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private val user = itemView.findViewById<TextView>(R.id.user)
-        private val content = itemView.findViewById<TextView>(R.id.content)
+        private val contentText = itemView.findViewById<TextView>(R.id.content)
         private val time = itemView.findViewById<TextView>(R.id.time)
+        private val image = itemView.findViewById<ImageView>(R.id.imageView)
 
         fun bind(item: Message, isSameUserAsAbove: Boolean) {
             user.isVisible = !isSameUserAsAbove
-            user.text =
-                item.user?.displayName ?: user.context.getString(R.string.no_name)
-            content.text = item.content
+            user.text = item.user?.displayName ?: user.context.getString(R.string.no_name)
+            image.isVisible = false
+            when (val content = item.content) {
+                is Content.Text -> {
+                    contentText.text = content.text
+                }
+                is Content.Media -> {
+                    image.isVisible = true
+                    contentText.text = content.text
+                    Glide.with(requireContext()).load(content.uri).centerCrop().into(image)
+                }
+                else -> contentText.text = "Unsupported content"
+            }
+
             time.text = formattedTime(item.created.time)
             itemView.setOnLongClickListener {
                 MaterialAlertDialogBuilder(itemView.context)
@@ -151,6 +186,13 @@ class ChatFragment : Fragment() {
             }
         }
 
+        fun recycle() {
+            image.visibility = View.GONE
+            user.text = null
+            contentText.text = null
+            time.text = null
+        }
+
         private val formatter = SimpleDateFormat("HH:mm")
 
         private fun formattedTime(time: Long): String {
@@ -163,7 +205,8 @@ class ChatFragment : Fragment() {
             override fun areItemsTheSame(oldItem: Message, newItem: Message) =
                 oldItem.id == newItem.id
 
-            override fun areContentsTheSame(oldItem: Message, newItem: Message) = oldItem == newItem
+            override fun areContentsTheSame(oldItem: Message, newItem: Message) =
+                oldItem.content == newItem.content
         }
     }
 }

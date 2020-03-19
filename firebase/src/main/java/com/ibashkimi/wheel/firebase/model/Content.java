@@ -1,11 +1,9 @@
-package com.ibashkimi.wheel.core.model.posts;
-
+package com.ibashkimi.wheel.firebase.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.annotation.Nullable;
-
 
 public class Content implements Parcelable {
 

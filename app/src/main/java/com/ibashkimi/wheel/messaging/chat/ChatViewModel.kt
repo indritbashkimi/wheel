@@ -4,6 +4,7 @@ import androidx.lifecycle.*
 import androidx.paging.PagedList
 import androidx.paging.toLiveData
 import com.ibashkimi.wheel.core.User
+import com.ibashkimi.wheel.core.model.core.Content
 import com.ibashkimi.wheel.core.model.messaging.Message
 import com.ibashkimi.wheel.firestore.core.FirestoreUserManager
 import com.ibashkimi.wheel.firestore.messaging.FirestoreMessagingDataManager
@@ -30,7 +31,7 @@ class ChatViewModel(chatId: String) : ViewModel() {
     val messagesPaged: LiveData<PagedList<Message>> =
         repository.getMessagesPaged(chatId).toLiveData(20)
 
-    fun sendMessage(chatId: String, message: String) {
+    fun sendMessage(chatId: String, message: Content) {
         CoroutineScope(Dispatchers.IO).launch {
             repository.createMessage(chatId, message)
                 .catch { android.util.Log.d("ChatViewModel", "error sending message") }

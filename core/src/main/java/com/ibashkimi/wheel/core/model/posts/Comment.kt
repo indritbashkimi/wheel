@@ -1,10 +1,8 @@
 package com.ibashkimi.wheel.core.model.posts
 
-import android.os.Parcelable
 import com.ibashkimi.wheel.core.User
-import kotlinx.android.parcel.Parcelize
+import com.ibashkimi.wheel.core.model.core.Content
 
-@Parcelize
 data class Comment(
     val uid: String,
     val content: Content,
@@ -12,4 +10,4 @@ data class Comment(
     val postId: String,
     val userId: String,
     var user: User? = null
-) : Parcelable
+)

@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import com.bumptech.glide.Glide
 import com.ibashkimi.wheel.R
 import com.ibashkimi.wheel.core.model.posts.Comment
+import com.ibashkimi.wheel.core.model.core.Content
 import com.ibashkimi.wheel.core.relativeTimeSpan
 import com.ibashkimi.wheel.utils.AdapterItemClickListener
 
@@ -24,7 +25,10 @@ class CommentAdapter(var listener: AdapterItemClickListener<Comment>? = null) :
         Glide.with(holder.userImage).load(user?.imageUrl).placeholder(R.drawable.ic_profile_pic)
             .into(holder.userImage)
         holder.name.text = user?.displayName ?: holder.name.context.getString(R.string.no_name)
-        holder.content.text = comment.content.textContent
+        holder.content.text = when (val content = comment.content) {
+            is Content.Text -> content.text
+            else -> "Unsupported content"
+        }
         holder.time.text = comment.createdAt.relativeTimeSpan()
         holder.itemView.setOnClickListener {
             listener?.onItemClick(getItem(holder.adapterPosition), false)

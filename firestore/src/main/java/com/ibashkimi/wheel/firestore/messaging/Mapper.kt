@@ -5,6 +5,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot
 import com.google.firebase.firestore.QuerySnapshot
 import com.ibashkimi.wheel.core.model.messaging.Message
 import com.ibashkimi.wheel.core.model.messaging.Room
+import com.ibashkimi.wheel.firestore.core.toContent
 
 fun QuerySnapshot.toRoomList(): List<Room> = this.map { it.toRoom() }
 
@@ -26,7 +27,7 @@ fun DocumentSnapshot.toMessage(chatId: String) = Message(
     chatId = chatId,
     userId = getString("user")!!,
     created = getDate("created")!!,
-    content = getString("content")!!
+    content = toContent(getString("contentType")!!)
 )
 
 fun QueryDocumentSnapshot.toMessage(chatId: String) = Message(
@@ -34,5 +35,5 @@ fun QueryDocumentSnapshot.toMessage(chatId: String) = Message(
     chatId = chatId,
     userId = getString("user")!!,
     created = getDate("created")!!,
-    content = getString("content")!!
+    content = toContent(getString("contentType") ?: "unsupported")
 )

@@ -2,7 +2,6 @@ package com.ibashkimi.wheel.firebase.model
 
 import com.google.firebase.database.Exclude
 import com.google.firebase.database.IgnoreExtraProperties
-import com.ibashkimi.wheel.core.model.posts.Content
 
 @IgnoreExtraProperties
 data class FirebaseComment(

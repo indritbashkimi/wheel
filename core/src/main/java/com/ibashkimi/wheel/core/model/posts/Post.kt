@@ -1,9 +1,7 @@
 package com.ibashkimi.wheel.core.model.posts
 
-import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
+import com.ibashkimi.wheel.core.model.core.Content
 
-@Parcelize
 data class Post(
     val uid: String,
     val userId: String,
@@ -11,4 +9,4 @@ data class Post(
     val created: Long,
     val content: Content,
     var liked: Boolean = false
-) : Parcelable
+)

@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.ibashkimi.wheel.core.data.PostsDataManager
-import com.ibashkimi.wheel.core.model.posts.Content
+import com.ibashkimi.wheel.core.model.core.Content
 import com.ibashkimi.wheel.core.model.posts.Position
 import com.ibashkimi.wheel.core.model.posts.Post
 import com.ibashkimi.wheel.firestore.posts.FirestorePostsDataManager
@@ -38,10 +38,7 @@ class AddPostViewModel : ViewModel() {
                 userId = FirebaseAuth.getInstance().currentUser!!.uid,
                 position = pos,
                 created = System.currentTimeMillis(),
-                content = Content(
-                    content,
-                    image.value
-                )
+                content = Content.Text(content)
             )
             repository
                 .putPost(post)

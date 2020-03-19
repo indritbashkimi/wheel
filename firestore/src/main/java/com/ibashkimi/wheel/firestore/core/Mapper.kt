@@ -4,6 +4,7 @@ import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.QuerySnapshot
 import com.ibashkimi.wheel.core.User
 import com.ibashkimi.wheel.core.model.core.Connection
+import com.ibashkimi.wheel.core.model.core.Content
 import com.ibashkimi.wheel.core.model.core.Event
 import com.ibashkimi.wheel.core.model.posts.Like
 
@@ -100,4 +101,23 @@ fun DocumentSnapshot.toLike(): Like? {
             created = getLong("created")!!
         )
     } else null
+}
+
+fun DocumentSnapshot.toContent(type: String): Content = when (type) {
+    "text" -> Content.Text(getString("contentText") ?: "")
+    "image" -> Content.Media.Image(getString("contentUri") ?: "", getString("contentText") ?: "")
+    "video" -> Content.Media.Video(getString("contentUri") ?: "", getString("contentText") ?: "")
+    "animation" -> Content.Media.Animation(
+        getString("contentUri") ?: "",
+        getString("contentText") ?: ""
+    )
+    else -> Content.Unsupported(type)
+}
+
+fun Content.toType(): String = when (this) {
+    is Content.Text -> "text"
+    is Content.Media.Image -> "image"
+    is Content.Media.Video -> "video"
+    is Content.Media.Animation -> "animation"
+    is Content.Unsupported -> "unsupported"
 }

@@ -7,13 +7,12 @@ import com.ibashkimi.wheel.core.CachedData
 import com.ibashkimi.wheel.core.Direction
 import com.ibashkimi.wheel.core.User
 import com.ibashkimi.wheel.core.data.PostsDataManager
-import com.ibashkimi.wheel.core.model.posts.Comment
-import com.ibashkimi.wheel.core.model.posts.Like
-import com.ibashkimi.wheel.core.model.posts.Post
-import com.ibashkimi.wheel.core.model.posts.UserPost
+import com.ibashkimi.wheel.core.model.core.Content
+import com.ibashkimi.wheel.core.model.posts.*
 import com.ibashkimi.wheel.firestore.*
 import com.ibashkimi.wheel.firestore.core.FirestoreUserManager
 import com.ibashkimi.wheel.firestore.core.toLike
+import com.ibashkimi.wheel.firestore.core.toType
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.combine
@@ -33,13 +32,21 @@ class FirestorePostsDataManager : BaseFirestoreManager(), PostsDataManager {
     override fun putComment(comment: Comment): Flow<String> =
         db.collection("posts").document(comment.postId)
             .collection("comments").document().writeFlow(
-                hashMapOf(
-                    "contentType" to "text",
-                    "contentText" to comment.content.textContent,
+                mutableMapOf(
+                    "contentType" to comment.content.toType(),
                     "createdAt" to comment.createdAt,
                     "postId" to comment.postId,
                     "userId" to comment.userId
-                )
+                ).apply {
+                    when (val content = comment.content) {
+                        is Content.Text -> this["contentText"] = content.text
+                        is Content.Media -> {
+                            this["contentUri"] = content.uri
+                            content.text?.let { this["contentText"] = it }
+                        }
+                        is Content.Unsupported -> throw IllegalStateException("Trying to send unsupported content.")
+                    }
+                }
             )
 
     override fun getComment(postId: String, commentId: String): Flow<Comment?> =
@@ -223,7 +230,7 @@ class FirestorePostsDataManager : BaseFirestoreManager(), PostsDataManager {
 
     override fun putPost(post: Post): Flow<String> =
         db.collection("posts").document().writeFlow(
-            hashMapOf(
+            mutableMapOf(
                 "userId" to post.userId,
                 "position" to post.position?.let {
                     GeoPoint(
@@ -235,8 +242,16 @@ class FirestorePostsDataManager : BaseFirestoreManager(), PostsDataManager {
                 "longitude" to post.position?.longitude, // todo unify fields of position?
                 "address" to post.position?.address,
                 "created" to Date(post.created),
-                "contentType" to "text",
-                "contentText" to post.content.textContent
-            )
+                "contentType" to post.content.toType()
+            ).apply {
+                when (val content = post.content) {
+                    is Content.Text -> this["contentText"] = content.text
+                    is Content.Media -> {
+                        this["contentUri"] = content.uri
+                        content.text?.let { this["contentText"] = it }
+                    }
+                    is Content.Unsupported -> throw IllegalStateException("Trying to send unsupported content.")
+                }
+            }
         )
 }

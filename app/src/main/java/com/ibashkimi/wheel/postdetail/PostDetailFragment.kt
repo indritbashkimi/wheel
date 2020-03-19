@@ -22,7 +22,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.ibashkimi.wheel.R
 import com.ibashkimi.wheel.comments.CommentAdapter
 import com.ibashkimi.wheel.core.model.posts.Comment
-import com.ibashkimi.wheel.core.model.posts.Content
+import com.ibashkimi.wheel.core.model.core.Content
 import com.ibashkimi.wheel.core.model.posts.Post
 import com.ibashkimi.wheel.core.relativeTimeSpan
 import com.ibashkimi.wheel.core.toast
@@ -131,10 +131,7 @@ class PostDetailFragment : Fragment() {
         binding.inputLayout.setEndIconOnClickListener {
             val comment = Comment(
                 uid = "",
-                content = Content(
-                    binding.input.text.toString(),
-                    null
-                ),
+                content = Content.Text(binding.input.text.toString()),
                 createdAt = System.currentTimeMillis(),
                 postId = args.postId,
                 userId = FirebaseAuth.getInstance().currentUser!!.uid
@@ -151,7 +148,10 @@ class PostDetailFragment : Fragment() {
     }
 
     private fun onPostReady(post: Post) {
-        binding.content.text = post.content.textContent
+        binding.content.text = when (val content = post.content) {
+            is Content.Text -> content.text
+            else -> "Unsupported content"
+        }
         binding.time.text = post.created.relativeTimeSpan()
         val position = post.position
         if (position == null) {

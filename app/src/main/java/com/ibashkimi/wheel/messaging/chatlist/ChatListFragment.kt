@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.ibashkimi.wheel.R
+import com.ibashkimi.wheel.core.model.core.Content
 import com.ibashkimi.wheel.core.model.messaging.Message
 import com.ibashkimi.wheel.core.model.messaging.Room
 import com.ibashkimi.wheel.core.relativeTimeSpan
@@ -132,7 +133,13 @@ class ChatListFragment : Fragment() {
                     android.util.Log.d("ChatListFragment", "last message: $message")
                     message?.let {
                         date.text = it.created.relativeTimeSpan()
-                        lastMessage.text = it.content
+                        lastMessage.text = when (val content = it.content) {
+                            is Content.Text -> content.text
+                            is Content.Media.Image -> "Image"
+                            is Content.Media.Video -> "Video"
+                            is Content.Media.Animation -> "GIF"
+                            else -> "Unsupported content"
+                        }
                     }
                 })
             }

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.ibashkimi.wheel.R
+import com.ibashkimi.wheel.core.model.core.Content
 import com.ibashkimi.wheel.core.model.posts.Post
 import com.ibashkimi.wheel.core.model.posts.UserPost
 import com.ibashkimi.wheel.core.relativeTimeSpan
@@ -42,7 +43,10 @@ class PostsAdapter(var listener: (ClickEvent) -> Unit) :
                 binding.position.text =
                     post.position?.address ?: post.position?.run { "$latitude : $longitude" }
             }
-            binding.content.text = post.content.textContent
+            binding.content.text = when (val content = post.content) {
+                is Content.Text -> content.text
+                else -> "Unsupported content"
+            }
             binding.time.text = post.created.relativeTimeSpan()
             binding.root.setOnClickListener {
                 listener(

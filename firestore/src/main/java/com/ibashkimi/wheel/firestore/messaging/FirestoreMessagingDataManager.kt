@@ -6,10 +6,12 @@ import com.google.firebase.firestore.Query
 import com.ibashkimi.wheel.core.CachedData
 import com.ibashkimi.wheel.core.Direction
 import com.ibashkimi.wheel.core.data.MessagingDataSource
+import com.ibashkimi.wheel.core.model.core.Content
 import com.ibashkimi.wheel.core.model.messaging.Message
 import com.ibashkimi.wheel.core.model.messaging.Room
 import com.ibashkimi.wheel.firestore.*
 import com.ibashkimi.wheel.firestore.core.FirestoreUserManager
+import com.ibashkimi.wheel.firestore.core.toType
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -35,15 +37,24 @@ class FirestoreMessagingDataManager : BaseFirestoreManager(), MessagingDataSourc
             )
         }
 
-    override fun createMessage(chatId: String, message: String): Flow<String> =
+    override fun createMessage(chatId: String, content: Content): Flow<String> =
         db.collection("chats").document(chatId)
             // todo update chat
             .collection("messages").document().writeFlow(
                 hashMapOf(
-                    "content" to message,
                     "user" to FirebaseAuth.getInstance().currentUser!!.uid,
-                    "created" to Date()
-                )
+                    "created" to Date(),
+                    "contentType" to content.toType()
+                ).apply {
+                    when (content) {
+                        is Content.Text -> this["contentText"] = content.text
+                        is Content.Media -> {
+                            this["contentUri"] = content.uri
+                            content.text?.let { this["contentText"] = it }
+                        }
+                        is Content.Unsupported -> throw IllegalStateException("Trying to send unsupported content.")
+                    }
+                }
             )
 
     override fun getChat(chatId: String): Flow<Room?> =
