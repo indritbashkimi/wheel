@@ -5,7 +5,7 @@ import androidx.preference.PreferenceFragmentCompat
 import com.ibashkimi.wheel.R
 
 class PrefsFragment : PreferenceFragmentCompat() {
-    override fun onCreatePreferences(bundle: Bundle, s: String) {
+    override fun onCreatePreferences(bundle: Bundle?, rootKey: String?) {
         addPreferencesFromResource(R.xml.pref_general)
     }
 }
