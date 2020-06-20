@@ -16,7 +16,9 @@ android {
         consumerProguardFiles 'consumer-rules.pro'
     }
 
-    viewBinding.enabled = true
+    buildFeatures {
+        viewBinding true
+    }
 
     buildTypes {
         release {
@@ -47,9 +49,10 @@ dependencies {
     api deps.playservices.mapsutils
     api deps.playservices.location
     implementation deps.google.material
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.core:core-ktx:1.2.0'
-    testImplementation 'junit:junit:4.12'
+    implementation deps.androidx.appcompat
+    implementation deps.androidx.corektx
+
+    testImplementation deps.test.junit
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    androidTestImplementation deps.test.espresso.core
 }

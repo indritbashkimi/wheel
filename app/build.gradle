@@ -22,8 +22,9 @@ android {
         versionName "0.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-    viewBinding.enabled = true
-    //android.buildFeatures.viewBinding = true
+    buildFeatures {
+        viewBinding true
+    }
     buildTypes {
         release {
             minifyEnabled true
@@ -61,7 +62,7 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:${versions.androidx.navigation}"
     implementation "androidx.navigation:navigation-ui-ktx:${versions.androidx.navigation}"
 
-    implementation 'com.google.guava:guava:28.2-android'
+    implementation 'com.google.guava:guava:29.0-android'
 }
 
 allprojects {
