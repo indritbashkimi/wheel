@@ -148,8 +148,10 @@ class PlacePickerActivity : AppCompatActivity(), OnMapReadyCallback {
                 googleMap.isMyLocationEnabled = true
                 if (center == null) {
                     val locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
-                    val provider = locationManager.getBestProvider(Criteria(), true)
-                    val myLocation = locationManager.getLastKnownLocation(provider)
+                    val myLocation =
+                        locationManager.getBestProvider(Criteria(), true)?.let { provider ->
+                            locationManager.getLastKnownLocation(provider)
+                        }
                     center = if (myLocation != null)
                         LatLng(myLocation.latitude, myLocation.longitude)
                     else
