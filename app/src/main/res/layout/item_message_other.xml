@@ -7,6 +7,7 @@
     android:background="?attr/selectableItemBackground"
     android:clickable="true"
     android:focusable="true"
+    android:gravity="start"
     android:orientation="vertical">
 
     <TextView
@@ -31,7 +32,7 @@
         app:cardElevation="0dp"
         app:contentPadding="-8dp"
         app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.RightRounded"
-        app:strokeColor="?colorPrimary"
+        app:strokeColor="?android:textColorSecondary"
         app:strokeWidth="1dp">
 
         <LinearLayout
@@ -42,7 +43,7 @@
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/imageView"
                 android:layout_width="200dp"
-                android:layout_height="200dp"
+                android:layout_height="wrap_content"
                 android:visibility="gone"
                 app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.RightRounded" />
 
@@ -66,9 +67,8 @@
 
                 <TextView
                     android:id="@+id/content"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:gravity="start"
                     android:textAppearance="?textAppearanceSubtitle1"
                     tools:text="How are you?" />

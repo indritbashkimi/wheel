@@ -166,7 +166,7 @@ class ChatFragment : Fragment() {
                 is Content.Media -> {
                     image.isVisible = true
                     contentText.text = content.text
-                    Glide.with(requireContext()).load(content.uri).centerCrop().into(image)
+                    Glide.with(requireContext()).load(content.uri).into(image)
                 }
                 else -> contentText.text = "Unsupported content"
             }
