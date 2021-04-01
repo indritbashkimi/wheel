@@ -62,7 +62,7 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:${versions.androidx.navigation}"
     implementation "androidx.navigation:navigation-ui-ktx:${versions.androidx.navigation}"
 
-    implementation 'com.google.guava:guava:29.0-android'
+    implementation 'com.google.guava:guava:30.1.1-android'
 }
 
 allprojects {

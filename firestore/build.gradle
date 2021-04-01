@@ -43,6 +43,6 @@ dependencies {
     implementation deps.firebase.firestore
 
     testImplementation deps.test.junit
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation deps.test.espresso.core
 }
