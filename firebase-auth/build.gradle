@@ -36,7 +36,6 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation deps.kotlin.stdlib
     api deps.firebase.core
     api deps.firebase.auth
     implementation deps.firebase.uiauth

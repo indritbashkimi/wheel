@@ -52,23 +52,11 @@ dependencies {
     implementation deps.google.material
 
     implementation deps.androidx.browser
-    implementation deps.androidx.cardview
-    implementation deps.androidx.media
-    implementation deps.androidx.percentlayout
     implementation deps.androidx.preference
     implementation deps.androidx.recyclerview
-    implementation deps.androidx.vectordrawable
 
     implementation deps.navigation.fragment
     implementation deps.navigation.ui
-
-    implementation 'com.google.guava:guava:30.1.1-android'
-}
-
-allprojects {
-    repositories {
-        maven { url 'https://maven.fabric.io/public' }
-    }
 }
 
 repositories {

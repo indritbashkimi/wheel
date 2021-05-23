@@ -41,7 +41,6 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     api project(":core")
-    api deps.kotlin.stdlib
     api deps.kotlin.coroutines
     api deps.google.places
     api deps.playservices.auth
@@ -50,7 +49,7 @@ dependencies {
     api deps.playservices.location
     implementation deps.google.material
     implementation deps.androidx.appcompat
-    implementation deps.androidx.corektx
+    implementation deps.androidx.core
 
     testImplementation deps.test.junit
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
