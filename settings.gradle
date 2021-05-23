@@ -1,6 +1,5 @@
 include ':app'
 include ':core'
 include ':firestore'
-include ':firebase'
 include ':location'
 include ':firebase-auth'
